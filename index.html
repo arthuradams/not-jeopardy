@@ -3,30 +3,29 @@
   <head>
     <title>Trivia</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="atm.css">
+    <link rel="stylesheet" href="trivia.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="questions.js"></script>
     <script src="trivia.js"></script>
   </head>
   <body>
     <div class="header">
-      <div class="title">Bank of GA</div>
+      <div class="title">A General Assemblage of Trivia</div>
     </div>
 
-    <div id="checking" class="account">
-      <h2>Checking</h2>
-      <div id="checkingbalance">$0</div>
-      <input id="checkinginput" type="text" placeholder="enter an amount" />
-      <input id="checkingdeposit" type="button" value="Deposit" />
-      <input id="checkingwithdrawal" type="button" value="Withdraw" />
+    <div id="question">
+      <div id="questiontext"></div>
     </div>
 
-    <div id="savings" class="account">
-      <h2>Savings</h2>
-      <div id="savingsbalance">$0</div>
-      <input id="savingsinput" type="text" placeholder="enter an amount" />
-      <input id="savingsdeposit" type="button" value="Deposit" />
-      <input id="savingswithdrawal" type="button" value="Withdraw" />
+    <div class="answers">
+      <ol>
+        <li id="answerA"></li>
+        <li id="answerB"></li>
+        <li id="answerC"></li>
+        <li id="answerD"></li>
+      </ol>
     </div>
+
+
   </body>
 </html>

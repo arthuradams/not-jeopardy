@@ -18,7 +18,6 @@ var questions =  [
                   { text: 'Richard Nixon, dressed as Batman' },
                   { text: 'Batman, dressed as Richard Nixon' }
               ],
-    image : "woodchuck.jpg",
   },
 
 ]

@@ -2,24 +2,41 @@
 
 function displayQuestion( question ) {
   console.log(question.text);
+  $("#questiontext").text(question.text);
 }
 
 function displayAnswers( question ) {
 
   var answersArray = question.answers;
   var selectors = ["A", "B", "C", "D"];
-  var answerChecker = [];
+  var answerChecker = {};
 
   for (var i = 0; i < answersArray.length; i++ ) {
     console.log(selectors[i] + " " + answersArray[i].text);
     answerChecker[selectors[i]] = answersArray[i];
+    $("#answer" + selectors[i]).text(answersArray[i].text);
   }
 
+/*  var response = prompt("Enter the letter corresponding to your answer");
+
+  if (answerChecker[response].correct) {
+    console.log("Correct");
+  }
+  else {
+    console.log("wrong");
+  }
+  */
+
+  return answerChecker;
 }
 
 
 $(document).ready(function(){
-  // checking deposit
+
+  displayQuestion( questions[0] );
+  displayAnswers( questions[0] );
+
+/*  // checking deposit
   $("#checkingdeposit").on("click", function(){
     var cdeposit = parseInt($("#checkinginput").val());
     var cbalance = parseInt($("#checkingbalance").text().replace("$", ""));
@@ -54,5 +71,5 @@ $(document).ready(function(){
       overdraftWithdrawal(savingsBalance, withdraw, checkingBalance);
     $("#checkingbalance").text("$" + checkingBalance);
     $("#savingsbalance").text("$" + savingsBalance);
-  })
+  }) */
 })
