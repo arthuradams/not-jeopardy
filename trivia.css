@@ -25,30 +25,30 @@ ul {
 }
 
 #question {
-  background-color: lightblue;
+  background-color: LightBlue;
   border-radius: 25px;
   /* width: 75%; */
 }
 
 #score {
   font-size: 120px;
-  color: red;
+  color: Red;
 }
 
 #result {
   font-size: 40px;
-  font-color: violet;
+  font-color: DarkGreen;
 }
 
 .answer {
     list-style-type: none;
     border-radius: 25px;
-    background-color: pink;
+    background-color: Pink;
     /* width: 75%; */
 }
 
 .answer:hover {
-  background-color: lemonchiffon;
+  background-color: LemonChiffon;
   font-weight: 900;
   font-size: 150%;
   text-align: center;
