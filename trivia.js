@@ -9,11 +9,14 @@ function displayAnswers( question ) {
 
   var answersArray = question.answers;
   var selectors = ["A", "B", "C", "D"];
-  var answerChecker = {};
+  var correctAnswer;
 
   for (var i = 0; i < answersArray.length; i++ ) {
     console.log(selectors[i] + " " + answersArray[i].text);
-    answerChecker[selectors[i]] = answersArray[i];
+    // answerChecker[selectors[i]] = answersArray[i];
+    if (answersArray[i].correct) {
+      correctAnswer = selectors[i];
+    }
     $("#answer" + selectors[i]).text(answersArray[i].text);
   }
 
@@ -27,14 +30,45 @@ function displayAnswers( question ) {
   }
   */
 
-  return answerChecker;
+  return correctAnswer;
+}
+
+function displayResult( choice, correct ) {
+  if ( choice == correct) {
+    console.log(choice + " is correct");
+  }
+  else {
+    console.log(choice + " is incorrect; the correct answer is " + correct );
+  }
 }
 
 
 $(document).ready(function(){
 
   displayQuestion( questions[0] );
-  displayAnswers( questions[0] );
+  var correctAnswer = displayAnswers( questions[0] );
+
+  $("#answerA").on("click", function(){
+    displayResult("A", correctAnswer );
+  });
+
+  $("#answerB").on("click", function(){
+    displayResult("B", correctAnswer );
+  });
+
+  $("#answerC").on("click", function(){
+    displayResult("C", correctAnswer );
+  });
+
+  $("#answerD").on("click", function(){
+    displayResult("D", correctAnswer );
+  });
+
+/*  $("#answerA").on("click", checkAnswer('A'));
+  $("#answerB").on("click", checkAnswer('B'));
+  $("#answerC").on("click", checkAnswer('C'));
+  $("#answerD").on("click", checkAnswer('D'));
+*/
 
 /*  // checking deposit
   $("#checkingdeposit").on("click", function(){

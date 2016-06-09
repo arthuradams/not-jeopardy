@@ -1,0 +1,40 @@
+@import url(http://fonts.googleapis.com/css?family=Oleo+Script);
+@import url(http://fonts.googleapis.com/css?family=Ruluko);
+
+body {
+  font-family: 'Ruluko', sans-serif;
+  margin: 0px auto;
+  text-align: center;
+  width: 700px;
+}
+
+.header {
+  margin: 50px 0px;
+}
+
+.title {
+  color: #F52F4F;
+  font-family: 'Oleo Script', cursive;
+  font-size: 50px;
+}
+
+#question {
+  background-color: lightblue;
+  border-radius: 25px;
+  width: 75%;
+}
+
+
+.answer {
+    list-style-type: none;
+    border-radius: 25px;
+    background-color: pink;
+    width: 50%;
+}
+
+.answer:hover {
+  background-color: lemonchiffon;
+  font-weight: 900;
+  font-size: 150%;
+  text-align: center;
+}
