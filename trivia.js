@@ -20,6 +20,14 @@ function shuffle(array) {
 function displayQuestion( question ) {
   console.log(question.text);
   $("#questiontext").text(question.text);
+  if (question.image) {
+    $('#questionImage').attr("src",question.image);
+    $('#questionImage').attr("display","block");
+  }
+  else {
+    $('#questionImage').attr("src","");
+    $('#questionImage').attr("display","none");
+  }
 }
 
 function displayAnswers( question ) {
