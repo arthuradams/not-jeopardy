@@ -6,6 +6,14 @@ This implements the trivia game listed as one of the possible choices for the as
 
 HTML and CSS to define page, JavaScript (including JQuery) to add functionality
 
+## Implementation
+
+`index.html` is essentially just a collection of div tags that are changed by `trivia.js`. 
+`trivia.css` defines the look of page, plus a mouse over bit to make the answer buttons "pop".
+`trivia.js` is where all the "hard work" goes on. It reads a question from the array of questions, displays the question and an optional image, and the answers. It also adds onClick to the buttons to listen for the user's answers.
+
+More details in the comments of the files. 
+
 ## User Stories
 ### Bronze
 | As a user  | I want to  |
@@ -48,6 +56,7 @@ Actual prizes is listed for the amusement value.
   * The color scheme is best described as "colors I thought of while writing the code." 
   * Better borders, margins, background colors.
   * Better handling of the optional image. There'a a wide range of things to improve that. Part of the issue is that it was the last major feature I added. 
+  * Maybe put the anwswers into a 2x2 grid. I'm not sure if that would improve things, but it might be worth  try. 
   * Add image support for the answers. 
 * An actual database of questions would be a huge enhancement. 
   * Loading a .js file consisting of an array of questions works when you have three questions to show the app works. It would be absurdly slow for the thousands of questions a real game would require. 
