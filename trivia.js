@@ -1,3 +1,5 @@
+//KP: overall your code looks very neat with appropriate comments to explain each function. Did not really comment on much to refactor. You have great code writing habits
+
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -58,6 +60,8 @@ function displayAnswers( question ) {
   return correctAnswer;
 }
 
+
+//KP: very good naming conventions
 function displayResult( choice, correct ) {
   if ( choice == correct) {
     console.log(choice + " is correct");
@@ -95,6 +99,8 @@ $(document).ready(function(){
   displayQuestion( questions[0] );
   correctAnswer = displayAnswers( questions[0] ); */
 
+
+//KP: your code here is very readable, great job!
   $("#answerA").on("click", function(){
     if (correctAnswer == "A") {
       score += 1;
