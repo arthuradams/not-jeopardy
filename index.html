@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Trivia</title>
+    <title>A General Assemblage of Trivia</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="trivia.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -10,14 +10,28 @@
   </head>
   <body>
     <div class="header">
-      <div class="title">A General Assemblage of Trivia</div>
+      <div class="title">A Generic Assemblage of Trivia</div>
     </div>
 
+    <!-- A field for the resuklt of the previous question
+    Also displays a welome for the first question. -->
+    <div id="result"></div>
+
+    <!-- A field to display the score. -->
+    <div id="score"></div>
+
+    <!-- Display the question -->
     <div id="question">
       <div id="questiontext"></div>
+
+      <!-- Display an image with the question. The js will hide the element
+      if there is no image. -->
+      <img id="questionImage" src=""/>
     </div>
 
+
     <div>
+      <!-- display the four buttons to select an answer -->
       <ul class="answers" >
         <li class="answer" id="answerA"></li>
         <li class="answer" id="answerB"></li>
