@@ -30,7 +30,7 @@ var questions =  [
   },
 
   {
-    text : '<p>Thid is an arbitrary filler for testing purposes.</p>,<p>Select sny answer; it may or may not be correct.</p>',
+    text : 'This is an arbitrary filler for testing purposes. Select sny answer; it may or may not be correct.',
     answers : [ { text: 'Boom',
                   correct: true },
                   { text: 'Boom' },
