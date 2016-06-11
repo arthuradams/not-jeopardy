@@ -1,4 +1,6 @@
-function shuffle(array) {
+function shuffle(array) { // Randomizes the order of items in an array. I admit to copying this directly from
+                          // stackoverflow. I do understand that it goes through the array and swaps each element
+                          // with a randomly selected entry that has not been randomized yet. 
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -17,43 +19,37 @@ function shuffle(array) {
   return array;
 }
 
-function displayQuestion( question ) {
+function displayQuestion( question ) { // Display a question on the page
   console.log(question.text);
-  $("#questiontext").text(question.text);
-  if (question.image) {
+  $("#questiontext").text(question.text); // Put the question text on the page. There's no validation that there's anything
+                                          // in question.text, or that question.text is even there. There probably should be.
+  if (question.image) { // If an image is provided for the question, display it. Again, no validation, but should be. 
     $('#questionImage').attr("src",question.image);
-    $('#questionImage').attr("display","block");
+    $('#questionImage').attr("display","block"); // Toggle display of image. I'm not sure if this is the best way to toggle 
+                                                 // an image on and off, but it works well enough. 
   }
   else {
-    $('#questionImage').attr("src","");
-    $('#questionImage').attr("display","none");
+    $('#questionImage').attr("src",""); // Would this be enough by itself to toggle the image to off?
+    $('#questionImage').attr("display","none"); // Toggle display of image. I'm not sure if this is the best way to toggle 
+                                                 // an image on and off, but it works well enough. 
   }
 }
 
-function displayAnswers( question ) {
+function displayAnswers( question ) { // Display the possible answers for the question
 
-  var answersArray = shuffle( question.answers );
-  var selectors = ["A", "B", "C", "D"];
+  var answersArray = shuffle( question.answers ); // Randdomly sort the list of answers. 
+  var selectors = ["A", "B", "C", "D"]; // This is a holdover from when I was going to display letters in front 
+                                        // of each question. This can be refactored out easily.
   var correctAnswer;
 
-  for (var i = 0; i < answersArray.length; i++ ) {
+  for (var i = 0; i < answersArray.length; i++ ) { // Go through each question
     console.log(selectors[i] + " " + answersArray[i].text);
-    // answerChecker[selectors[i]] = answersArray[i];
-    if (answersArray[i].correct) {
+
+    if (answersArray[i].correct) { // Remember the correct answer. Needs checking for no correct, or more one than one.
       correctAnswer = selectors[i];
     }
-    $("#answer" + selectors[i]).text(answersArray[i].text);
+    $("#answer" + selectors[i]).text(answersArray[i].text); // Update the display
   }
-
-/*  var response = prompt("Enter the letter corresponding to your answer");
-
-  if (answerChecker[response].correct) {
-    console.log("Correct");
-  }
-  else {
-    console.log("wrong");
-  }
-  */
 
   return correctAnswer;
 }
@@ -67,14 +63,17 @@ function displayResult( choice, correct ) {
   }
 }
 
-function updateAll(score,result,question) {
+function updateAll(score,result,question) { // Wrapper function to update the entire display
   $("#result").text(result);
   $("#score").text(score);
   displayQuestion( question );
   return displayAnswers( question );
 }
 
-function nextQuestion(count) {
+function nextQuestion(count) { // If he had hundreds of questions, we'd just randomly select one,
+                               // perhaps with something to prohibit "re-runs". With a short list
+                               // of questions, just repeat the final question forever once it's
+                               // reached. 
   if (count < questions.length) {
     return questions[count];
   }
@@ -91,11 +90,9 @@ $(document).ready(function(){
   var questionCount = 0;
 
   correctAnswer = updateAll(score,"Welcome!",questions[questionCount++]);
-/*  $("#score").text(score);
-  displayQuestion( questions[0] );
-  correctAnswer = displayAnswers( questions[0] ); */
 
-  $("#answerA").on("click", function(){
+  $("#answerA").on("click", function(){ // Create listeners for each button. 
+                                        // THere HAS to be a DRY-er way to do this. 
     if (correctAnswer == "A") {
       score += 1;
       result = "Your previous answer was right!";
@@ -143,46 +140,4 @@ $(document).ready(function(){
     correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
   });
 
-/*  $("#answerA").on("click", checkAnswer('A'));
-  $("#answerB").on("click", checkAnswer('B'));
-  $("#answerC").on("click", checkAnswer('C'));
-  $("#answerD").on("click", checkAnswer('D'));
-*/
-
-/*  // checking deposit
-  $("#checkingdeposit").on("click", function(){
-    var cdeposit = parseInt($("#checkinginput").val());
-    var cbalance = parseInt($("#checkingbalance").text().replace("$", ""));
-    var cnewBalance = deposit(cbalance,cdeposit);
-    $("#checkingbalance").text("$" + cnewBalance);
-  })
-
-  // checking withdrawal /w overdraft protection
-  $("#checkingwithdrawal").on("click", function(){
-    var withdraw = parseInt($("#checkinginput").val());
-    var checkingBalance = parseInt($("#checkingbalance").text().replace("$", ""));
-    var savingsBalance = parseInt($("#savingsbalance").text().replace("$", ""));
-    [checkingBalance,savingsBalance] =
-      overdraftWithdrawal(checkingBalance, withdraw, savingsBalance);
-    $("#checkingbalance").text("$" + checkingBalance);
-    $("#savingsbalance").text("$" + savingsBalance);
-  })
-  // savings deposit
-  $("#savingsdeposit").on("click", function(){
-    var sdeposit = parseInt($("#savingsinput").val());
-    var sbalance = parseInt($("#savingsbalance").text().replace("$", ""));
-    var snewBalance = deposit(sbalance,sdeposit);
-    $("#savingsbalance").text("$" + snewBalance);
-  })
-
-  // savings withdraw with overdraft protection
-  $("#savingswithdrawal").on("click", function(){
-    var withdraw = parseInt($("#savingsinput").val());
-    var checkingBalance = parseInt($("#checkingbalance").text().replace("$", ""));
-    var savingsBalance = parseInt($("#savingsbalance").text().replace("$", ""));
-    [savingsBalance,checkingBalance] =
-      overdraftWithdrawal(savingsBalance, withdraw, checkingBalance);
-    $("#checkingbalance").text("$" + checkingBalance);
-    $("#savingsbalance").text("$" + savingsBalance);
-  }) */
 })
