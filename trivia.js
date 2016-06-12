@@ -67,7 +67,9 @@ function updateAll(score,result,question) { // Wrapper function to update the en
   $("#result").text(result);
   $("#score").text(score);
   displayQuestion( question );
-  return displayAnswers( question );
+  var value = question.value;
+  var answer = displayAnswers( question );
+  return [value, answer];
 }
 
 function nextQuestion(count) { // If he had hundreds of questions, we'd just randomly select one,
@@ -89,12 +91,12 @@ $(document).ready(function(){
   var result;
   var questionCount = 0;
 
-  correctAnswer = updateAll(score,"Welcome!",questions[questionCount++]);
+  [value, correctAnswer] = updateAll(score,"Welcome!",questions[questionCount++]);
 
   $("#answerA").on("click", function(){ // Create listeners for each button. 
                                         // THere HAS to be a DRY-er way to do this. 
     if (correctAnswer == "A") {
-      score += 1;
+      score += value;
       result = "Your previous answer was right!";
     }
     else {
@@ -109,11 +111,11 @@ $(document).ready(function(){
 
   $("#answerB").on("click", function(){
     if (correctAnswer == "B") {
-      score += 1;
+      score += value;
       result = "Your previous answer was right!";
     }
     else {
-      score -= 1;
+      score -= value;
       if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
         score = 0;
       }
@@ -124,7 +126,7 @@ $(document).ready(function(){
 
   $("#answerC").on("click", function(){
     if (correctAnswer == "C") {
-      score += 1;
+      score += value;
       result = "Your previous answer was right!";
     }
     else {
@@ -139,7 +141,7 @@ $(document).ready(function(){
 
   $("#answerD").on("click", function(){
     if (correctAnswer == "D") {
-      score += 1;
+      score += value;
       result = "Your previous answer was right!";
     }
     else {
