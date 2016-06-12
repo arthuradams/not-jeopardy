@@ -8,7 +8,7 @@ var questions =  [
                   { text: 'Radio announcer Billy Batson' }
               ],
     image : "woodchuck.jpg",
-    score : 1,
+    value : 1,
   },
 
   {
@@ -18,7 +18,7 @@ var questions =  [
                   { text: 'Student Peter Parker',  correct: true  },
                   { text: 'Latverian Monarch Victor von Doom' }
               ],
-    score : 2,
+    value : 2,
   },
 
   {
@@ -29,7 +29,7 @@ var questions =  [
                   { text: 'Beyond Deranged Irwin Schwab'  },
                   { text: 'a typical WDI student' }
               ],
-    score : 3,
+    value : 3,
   },
 
   {
@@ -40,7 +40,7 @@ var questions =  [
                   { text: 'Boom' },
                   { text: 'Boom' }
               ],
-    score : 0,          
+    value : 0,          
 
   },
 
