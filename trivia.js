@@ -99,6 +99,9 @@ $(document).ready(function(){
     }
     else {
       score -= 1;
+      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
+        score = 0;
+      }
       result = "Your previous answer was wrong!";
     }
     correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
@@ -111,6 +114,9 @@ $(document).ready(function(){
     }
     else {
       score -= 1;
+      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
+        score = 0;
+      }
       result = "Your previous answer was wrong!";
     }
     correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
@@ -123,6 +129,9 @@ $(document).ready(function(){
     }
     else {
       score -= 1;
+      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
+        score = 0;
+      }
       result = "Your previous answer was wrong!";
     }
     correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
@@ -135,6 +144,9 @@ $(document).ready(function(){
     }
     else {
       score -= 1;
+      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
+        score = 0;
+      }
       result = "Your previous answer was wrong!";
     }
     correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
