@@ -8,7 +8,7 @@ var questions =  [
                   { text: 'Radio announcer Billy Batson' }
               ],
     image : "woodchuck.jpg",
-    score : 1;
+    score : 1,
   },
 
   {
