@@ -106,7 +106,7 @@ $(document).ready(function(){
       }
       result = "Your previous answer was wrong!";
     }
-    correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+    [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
   });
 
   $("#answerB").on("click", function(){
@@ -121,7 +121,7 @@ $(document).ready(function(){
       }
       result = "Your previous answer was wrong!";
     }
-    correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+    [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
   });
 
   $("#answerC").on("click", function(){
@@ -136,7 +136,7 @@ $(document).ready(function(){
       }
       result = "Your previous answer was wrong!";
     }
-    correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+    [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
   });
 
   $("#answerD").on("click", function(){
@@ -151,7 +151,7 @@ $(document).ready(function(){
       }
       result = "Your previous answer was wrong!";
     }
-    correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+    [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
   });
 
 })
