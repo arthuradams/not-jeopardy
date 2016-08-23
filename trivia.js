@@ -1,6 +1,4 @@
-function shuffle(array) { // Randomizes the order of items in an array. I admit to copying this directly from
-                          // stackoverflow. I do understand that it goes through the array and swaps each element
-                          // with a randomly selected entry that has not been randomized yet. 
+function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -19,37 +17,43 @@ function shuffle(array) { // Randomizes the order of items in an array. I admit 
   return array;
 }
 
-function displayQuestion( question ) { // Display a question on the page
+function displayQuestion( question ) {
   console.log(question.text);
-  $("#questiontext").text(question.text); // Put the question text on the page. There's no validation that there's anything
-                                          // in question.text, or that question.text is even there. There probably should be.
-  if (question.image) { // If an image is provided for the question, display it. Again, no validation, but should be. 
+  $("#questiontext").text(question.text);
+  if (question.image) {
     $('#questionImage').attr("src",question.image);
-    $('#questionImage').attr("display","block"); // Toggle display of image. I'm not sure if this is the best way to toggle 
-                                                 // an image on and off, but it works well enough. 
+    $('#questionImage').attr("display","block");
   }
   else {
-    $('#questionImage').attr("src",""); // Would this be enough by itself to toggle the image to off?
-    $('#questionImage').attr("display","none"); // Toggle display of image. I'm not sure if this is the best way to toggle 
-                                                 // an image on and off, but it works well enough. 
+    $('#questionImage').attr("src","");
+    $('#questionImage').attr("display","none");
   }
 }
 
-function displayAnswers( question ) { // Display the possible answers for the question
+function displayAnswers( question ) {
 
-  var answersArray = shuffle( question.answers ); // Randdomly sort the list of answers. 
-  var selectors = ["A", "B", "C", "D"]; // This is a holdover from when I was going to display letters in front 
-                                        // of each question. This can be refactored out easily.
+  var answersArray = shuffle( question.answers );
+  var selectors = ["A", "B", "C", "D"];
   var correctAnswer;
 
-  for (var i = 0; i < answersArray.length; i++ ) { // Go through each question
+  for (var i = 0; i < answersArray.length; i++ ) {
     console.log(selectors[i] + " " + answersArray[i].text);
-
-    if (answersArray[i].correct) { // Remember the correct answer. Needs checking for no correct, or more one than one.
+    // answerChecker[selectors[i]] = answersArray[i];
+    if (answersArray[i].correct) {
       correctAnswer = selectors[i];
     }
-    $("#answer" + selectors[i]).text(answersArray[i].text); // Update the display
+    $("#" + selectors[i]).text(answersArray[i].text);
   }
+
+/*  var response = prompt("Enter the letter corresponding to your answer");
+
+  if (answerChecker[response].correct) {
+    console.log("Correct");
+  }
+  else {
+    console.log("wrong");
+  }
+  */
 
   return correctAnswer;
 }
@@ -63,19 +67,14 @@ function displayResult( choice, correct ) {
   }
 }
 
-function updateAll(score,result,question) { // Wrapper function to update the entire display
+function updateAll(score,result,question) {
   $("#result").text(result);
   $("#score").text(score);
   displayQuestion( question );
-  var value = question.value;
-  var answer = displayAnswers( question );
-  return [value, answer];
+  return displayAnswers( question );
 }
 
-function nextQuestion(count) { // If he had hundreds of questions, we'd just randomly select one,
-                               // perhaps with something to prohibit "re-runs". With a short list
-                               // of questions, just repeat the final question forever once it's
-                               // reached. 
+function nextQuestion(count) {
   if (count < questions.length) {
     return questions[count];
   }
@@ -91,67 +90,67 @@ $(document).ready(function(){
   var result;
   var questionCount = 0;
 
-  [value, correctAnswer] = updateAll(score,"Welcome!",questions[questionCount++]);
+  correctAnswer = updateAll(score,"Welcome!",questions[questionCount++]);
+  correctAnswer = displayAnswers( questions[0] );
 
-  $("#answerA").on("click", function(){ // Create listeners for each button. 
-                                        // THere HAS to be a DRY-er way to do this. 
-    if (correctAnswer == "A") {
-      score += value;
+  $(".answer").on("click", function() {
+    var myAnswer = $(this).id
+    if (correctAnswer == myAnswer) {
+      score += 1;
       result = "Your previous answer was right!";
     }
     else {
       score -= 1;
-      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
-        score = 0;
-      }
       result = "Your previous answer was wrong!";
     }
-    [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
-  });
-
-  $("#answerB").on("click", function(){
-    if (correctAnswer == "B") {
-      score += value;
-      result = "Your previous answer was right!";
-    }
-    else {
-      score -= value;
-      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
-        score = 0;
-      }
-      result = "Your previous answer was wrong!";
-    }
-    [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
-  });
-
-  $("#answerC").on("click", function(){
-    if (correctAnswer == "C") {
-      score += value;
-      result = "Your previous answer was right!";
-    }
-    else {
-      score -= 1;
-      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
-        score = 0;
-      }
-      result = "Your previous answer was wrong!";
-    }
-    [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
-  });
-
-  $("#answerD").on("click", function(){
-    if (correctAnswer == "D") {
-      score += value;
-      result = "Your previous answer was right!";
-    }
-    else {
-      score -= 1;
-      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
-        score = 0;
-      }
-      result = "Your previous answer was wrong!";
-    }
-    [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
-  });
+    correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+  })
+  // $("#answerA").on("click", function(){
+  //   if (correctAnswer == "A") {
+  //     score += 1;
+  //     result = "Your previous answer was right!";
+  //   }
+  //   else {
+  //     score -= 1;
+  //     result = "Your previous answer was wrong!";
+  //   }
+  //   correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+  // });
+  //
+  // $("#answerB").on("click", function(){
+  //   if (correctAnswer == "B") {
+  //     score += 1;
+  //     result = "Your previous answer was right!";
+  //   }
+  //   else {
+  //     score -= 1;
+  //     result = "Your previous answer was wrong!";
+  //   }
+  //   correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+  // });
+  //
+  // $("#answerC").on("click", function(){
+  //   if (correctAnswer == "C") {
+  //     score += 1;
+  //     result = "Your previous answer was right!";
+  //   }
+  //   else {
+  //     score -= 1;
+  //     result = "Your previous answer was wrong!";
+  //   }
+  //   correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+  // });
+  //
+  // $("#answerD").on("click", function(){
+  //   if (correctAnswer == "D") {
+  //     score += 1;
+  //     result = "Your previous answer was right!";
+  //   }
+  //   else {
+  //     score -= 1;
+  //     result = "Your previous answer was wrong!";
+  //   }
+  //   correctAnswer = updateAll(score,result,nextQuestion(questionCount++));
+  // });
 
 })
