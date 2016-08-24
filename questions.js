@@ -1,18 +1,18 @@
-/* File containing the questions and answers for the quiz, formatted as an array of objects.
+/* File containing the questions and answers for the quiz, formatted as an array of objects. 
 Each object should have the following properties.
-text: The text of the question itself.
-answers: another array of objects, representing the possible answers.
-  There are must be exactly four, and there is no validation of that. There
+text: The text of the question itself. 
+answers: another array of objects, representing the possible answers. 
+  There are must be exactly four, and there is no validation of that. There 
   probably should be. Each of them must have a text property, representing
   the possible answer. One and only one must have an additional property, correct,
   set to the boolean value true. That represents the corrent answer to the question.
-  Again, there's no validation thats there's only one value. There should be.
+  Again, there's no validation thats there's only one value. There should be. 
   Note that the ordsr of the answer is randomized, so you can't do anything like
-  "both a and c". A "no-random" proerty might be worthwhile.
+  "both a and c". A "no-random" proerty might be worthwhile. 
 image: The filename of an optional image to be displayed with the question. I've only tested this with a simple
   filename. I think a url, or a relative path on the server, should work.
 value: A required field, though again, no validation, but there should be. How many points the question is worth;
-  tougher questions are worth more. There's no boundary checking; there should be.
+  tougher questions are worth more. There's no boundary checking; there should be. 
 */
 
 var questions =  [
@@ -24,7 +24,7 @@ var questions =  [
                   { text: 'President Richard Nixon' },
                   { text: 'Radio announcer Billy Batson' }
               ],
-    image : "superman-phonebooth.jpg",
+    image : "woodchuck.jpg",
     value : 1,
   },
 
@@ -50,14 +50,14 @@ var questions =  [
   },
 
   {
-    text : 'This is an arbitrary filler for testing purposes. Select any answer; it may or may not be correct.',
+    text : 'This is an arbitrary filler for testing purposes. Select sny answer; it may or may not be correct.',
     answers : [ { text: 'Boom',
                   correct: true },
                   { text: 'Boom' },
                   { text: 'Boom' },
                   { text: 'Boom' }
               ],
-    value : 0,
+    value : 0,          
 
   },
 
