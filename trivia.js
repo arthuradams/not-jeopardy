@@ -1,6 +1,7 @@
+// AM: No issue with grabbing this from StackOverflow. There are a number of trusted JS shuffle methods out there that you are welcome to use. Good that you put effort into understanding it.
 function shuffle(array) { // Randomizes the order of items in an array. I admit to copying this directly from
                           // stackoverflow. I do understand that it goes through the array and swaps each element
-                          // with a randomly selected entry that has not been randomized yet. 
+                          // with a randomly selected entry that has not been randomized yet.
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -23,22 +24,25 @@ function displayQuestion( question ) { // Display a question on the page
   console.log(question.text);
   $("#questiontext").text(question.text); // Put the question text on the page. There's no validation that there's anything
                                           // in question.text, or that question.text is even there. There probably should be.
-  if (question.image) { // If an image is provided for the question, display it. Again, no validation, but should be. 
+  if (question.image) { // If an image is provided for the question, display it. Again, no validation, but should be.
     $('#questionImage').attr("src",question.image);
-    $('#questionImage').attr("display","block"); // Toggle display of image. I'm not sure if this is the best way to toggle 
-                                                 // an image on and off, but it works well enough. 
+    // AM: If you're going to modify the display property of an element, it's best to do this using `.css()`. It's usually not good practice to define CSS using HTML attributes.
+    $('#questionImage').attr("display","block"); // Toggle display of image. I'm not sure if this is the best way to toggle
+                                                 // an image on and off, but it works well enough.
   }
   else {
+    // AM: This works. jQuery also has a `.toggle` method which you should check out. See if that replaces both `.attr` statements you have below.
     $('#questionImage').attr("src",""); // Would this be enough by itself to toggle the image to off?
-    $('#questionImage').attr("display","none"); // Toggle display of image. I'm not sure if this is the best way to toggle 
-                                                 // an image on and off, but it works well enough. 
+    $('#questionImage').attr("display","none"); // Toggle display of image. I'm not sure if this is the best way to toggle
+                                                 // an image on and off, but it works well enough.
   }
 }
 
+// AM: +1
 function displayAnswers( question ) { // Display the possible answers for the question
 
-  var answersArray = shuffle( question.answers ); // Randdomly sort the list of answers. 
-  var selectors = ["A", "B", "C", "D"]; // This is a holdover from when I was going to display letters in front 
+  var answersArray = shuffle( question.answers ); // Randdomly sort the list of answers.
+  var selectors = ["A", "B", "C", "D"]; // This is a holdover from when I was going to display letters in front
                                         // of each question. This can be refactored out easily.
   var correctAnswer;
 
@@ -54,6 +58,7 @@ function displayAnswers( question ) { // Display the possible answers for the qu
   return correctAnswer;
 }
 
+// AM: Kudos on separating everything into functions. Really helps code readability.
 function displayResult( choice, correct ) {
   if ( choice == correct) {
     console.log(choice + " is correct");
@@ -75,7 +80,7 @@ function updateAll(score,result,question) { // Wrapper function to update the en
 function nextQuestion(count) { // If he had hundreds of questions, we'd just randomly select one,
                                // perhaps with something to prohibit "re-runs". With a short list
                                // of questions, just repeat the final question forever once it's
-                               // reached. 
+                               // reached.
   if (count < questions.length) {
     return questions[count];
   }
@@ -84,6 +89,7 @@ function nextQuestion(count) { // If he had hundreds of questions, we'd just ran
   }
 }
 
+// AM: Why is the above code not inside document.ready? Theoretically, the DOM elements you reference above might not be loaded by the time the Javascript code that references them is processed.
 $(document).ready(function(){
 
   var score = 0;
@@ -93,15 +99,15 @@ $(document).ready(function(){
 
   [value, correctAnswer] = updateAll(score,"Welcome!",questions[questionCount++]);
 
-  $("#answerA").on("click", function(){ // Create listeners for each button. 
-                                        // THere HAS to be a DRY-er way to do this. 
+  $("#answerA").on("click", function(){ // Create listeners for each button.
+                                        // THere HAS to be a DRY-er way to do this.
     if (correctAnswer == "A") {
       score += value;
       result = "Your previous answer was right!";
     }
     else {
       score -= 1;
-      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
+      if (score < 0) { // Don't let score go below zero, don't embarrass the user.
         score = 0;
       }
       result = "Your previous answer was wrong!";
@@ -116,7 +122,7 @@ $(document).ready(function(){
     }
     else {
       score -= value;
-      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
+      if (score < 0) { // Don't let score go below zero, don't embarrass the user.
         score = 0;
       }
       result = "Your previous answer was wrong!";
@@ -131,7 +137,7 @@ $(document).ready(function(){
     }
     else {
       score -= 1;
-      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
+      if (score < 0) { // Don't let score go below zero, don't embarrass the user.
         score = 0;
       }
       result = "Your previous answer was wrong!";
@@ -139,6 +145,10 @@ $(document).ready(function(){
     [value, correctAnswer] = updateAll(score,result,nextQuestion(questionCount++));
   });
 
+  // AM: These four event listeners look pretty similar. I'm wondering if you could create a single event listener for your <li>'s.
+  // AM: Inside the event listener you could then call a function that looks something like `checkAnswer(correctAnswer)` and you could use `$(this)` to extract information about what exactly was clicked.
+  // AM: You could then store information about what was clicked as an HTML attribute, like `data-answer="B"`.
+  // AM: Happy to talk about this more in person.
   $("#answerD").on("click", function(){
     if (correctAnswer == "D") {
       score += value;
@@ -146,7 +156,7 @@ $(document).ready(function(){
     }
     else {
       score -= 1;
-      if (score < 0) { // Don't let score go below zero, don't embarrass the user. 
+      if (score < 0) { // Don't let score go below zero, don't embarrass the user.
         score = 0;
       }
       result = "Your previous answer was wrong!";
@@ -155,3 +165,5 @@ $(document).ready(function(){
   });
 
 })
+
+// AM: I think this is what's supposed to happen, but the game doesn't go on beyond the last "Boom" question.

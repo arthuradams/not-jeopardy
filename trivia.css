@@ -1,3 +1,5 @@
+/* AM: Nice and short stylesheet. I would remove commented-out properties from the master branch of your project submission. You can save these in a separate branch if you'd like. */
+
 @import url(http://fonts.googleapis.com/css?family=Oleo+Script);
 @import url(http://fonts.googleapis.com/css?family=Ruluko);
 
@@ -47,6 +49,7 @@ ul {
     /* width: 75%; */
 }
 
+/* AM: In response to your question, it's definitely okay to handle making your buttons "pop" with CSS. */
 .answer:hover {
   background-color: LemonChiffon;
   font-weight: 900;
